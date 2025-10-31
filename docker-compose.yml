@@ -1,0 +1,40 @@
+# Define all the 'services' (containers) your app needs
+services:
+
+  # 1. The Backend Service
+  backend:
+    build: ./backend  # Tells Docker to find the Dockerfile in the './backend' folder
+    ports:
+      - "5000:5000"  # Maps your PC's port 8080 to the container's port 8080
+    env_file:
+      - ./.env  # Passes all your .env variables to the backend
+    depends_on:
+      db:
+        condition: service_healthy # IMPORTANT: Waits for the DB to be ready before starting
+
+  # 2. The Frontend Service
+  frontend:
+    build: ./frontend # Tells Docker to find the Dockerfile in the './frontend' folder
+    ports:
+      - "3000:80" # Maps your PC's port 3000 to the container's port 80 (Nginx)
+
+  # 3. The Database Service
+  db:
+    image: mysql:8.0  # Uses the official MySQL 8 image (no Dockerfile needed)
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}  # Gets these values from './backend/.env'
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      # This lets you still connect with MySQL Workbench if you want
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql # This saves your database data
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+# Defines the 'mysql-data' volume to persist data
+volumes:
+  mysql-data:

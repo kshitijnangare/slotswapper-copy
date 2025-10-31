@@ -1,0 +1,22 @@
+.event-form-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-form-container h3 {
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.event-form {
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .event-form-container {
+    padding: 1.5rem;
+  }
+}

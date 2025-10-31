@@ -1,0 +1,66 @@
+.marketplace-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.marketplace-header {
+  margin-bottom: 2rem;
+}
+
+.marketplace-header h1 {
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.marketplace-header p {
+  color: #6b7280;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.slot-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.slot-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slot-header {
+  margin-bottom: 1rem;
+}
+
+.slot-header h3 {
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.slot-owner {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.slot-time {
+  margin: 1rem 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.slot-time p {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .slots-grid {
+    grid-template-columns: 1fr;
+  }
+}
