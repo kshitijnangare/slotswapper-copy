@@ -1,17 +1,32 @@
+// /backend/src/config/database.js
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
-const pool = mysql.createPool({
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Create a base configuration object
+const poolConfig = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306, // Add DB_PORT for Railway
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
-});
+};
 
-// Initialize database tables
+// Add SSL configuration ONLY if in production
+if (isProduction) {
+  poolConfig.ssl = {
+    rejectUnauthorized: true,
+  };
+}
+
+// Create the pool with the final config
+const pool = mysql.createPool(poolConfig);
+
+// Initialize database tables (your function is perfect, no changes needed)
 const initializeDatabase = async () => {
   try {
     const connection = await pool.getConnection();
