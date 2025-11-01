@@ -1,0 +1,25 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+* **What this does:** It tells Vercel: "For any request that comes in (like `/login`, `/signup`, `/anything`), rewrite it to serve the `index.html` file." This lets your React app load and React Router to take control.
+
+#### Step 3: Fix the Favicon (Optional, but Good)
+The `favicon.ico 404` error is separate. Just make sure you have a file named `favicon.ico` inside your `frontend/public/` folder.
+
+#### Step 4: Commit and Push Your Fix
+Now, just add this one new file to GitHub.
+
+1.  Open your terminal in the **root `slotswapper/` folder**.
+2.  Run these commands:
+
+    ```bash
+    git add frontend/vercel.json
+    git commit -m "fix: Add vercel.json rewrites for React Router SPA"
+    git push
+    
