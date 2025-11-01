@@ -14,15 +14,21 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// --- PUBLIC ROUTES ---
+// Authentication and Health Check must be public
+// and defined *before* any protected routes.
 app.use('/api/auth', authRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api', swapRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'SlotSwapper API is running' });
 });
+
+// --- PROTECTED ROUTES ---
+// Your auth middleware is (correctly) applied inside these route files
+app.use('/api/events', eventRoutes);
+app.use('/api', swapRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -52,3 +58,4 @@ const startServer = async () => {
 startServer();
 
 module.exports = app;
+
